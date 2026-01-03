@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Meds Tracker</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <style>
+        :root { --p: #ff4d6d; --bg: #fff0f3; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); padding: 20px; text-align: center; }
+        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        button { background: var(--p); color: white; border: none; padding: 15px 30px; border-radius: 30px; font-size: 1.2rem; font-weight: bold; width: 100%; margin: 10px 0; }
+        .log-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+        #status { font-size: 0.8rem; color: #888; margin-bottom: 10px; }
+        .offline { color: red !important; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div id="status">Checking connection...</div>
+        <h2>Medication Log</h2>
+        <button onclick="takeMeds()">💊 Mark as Taken</button>
+        <button onclick="exportData()" style="background: #666; font-size: 0.9rem;">📥 Save Backup to Phone</button>
+        <button id="notif-btn" onclick="setupNotifications()" style="background: #4a90e2;">🔔 Enable Reminders</button>
+        <div id="history"></div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
